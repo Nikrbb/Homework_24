@@ -1,19 +1,22 @@
 // В первом примере сделал так, что бы при каждом вызове функции - генерировалось одно рандомное число, и пушилось в массив.
 {
-let randomNumbers = (() => {
-    let array = [];
-        return () => {
+    function randomNumbers () {
+        let array = [];
+        return function numbers () {
             let random = Math.floor(Math.random() * 100) + 1;
-            if (array.find(item => item === random)) return array;
+            if (array.length === 100) return `хвациць`
+            else if (array.find(item => item === random)) return numbers();
             else {
                 array.push(random)
                 return array;
             }
         }
-})();
-console.log(randomNumbers());
-console.log(randomNumbers());
-console.log(randomNumbers());
+    }
+let a = randomNumbers();
+console.log(a());
+console.log(a());
+console.log(a());
+
 }
 
 // OR
